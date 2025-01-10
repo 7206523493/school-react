@@ -38,30 +38,38 @@ const Dashboard = () => {
     <div>
       <style>
         {`
+          * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+          }
+
           body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
             display: flex;
             flex-direction: column;
-            justify-content: flex-start;
             align-items: center;
             min-height: 100vh;
             background-color: #f0f2f5;
           }
 
           .header {
-            width: 100%;
-            background-color: #007bff;
+            width: 100vw; /* Full width of the viewport */
+            background-color: #1e3d58; /* Modern dark background */
             color: #ffffff;
             padding: 20px 0;
             text-align: center;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+            top: 0;
           }
 
           .header h1 {
             margin: 0;
-            font-size: 32px;
+            font-size: 36px; /* Larger title for a professional look */
+            font-weight: bold;
           }
 
           .dashboard {
@@ -74,30 +82,32 @@ const Dashboard = () => {
           }
 
           .box {
-            background-color: #ffffff;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            background: linear-gradient(to bottom, #ffffff, #f8f9fa);
+            border-radius: 12px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
             padding: 20px;
-            display: flex;
+            margin:5px 5px 5px 15px;
+            // display: flex;
             flex-direction: column;
             justify-content: space-between;
             align-items: center;
-            transition: transform 0.3s, box-shadow 0.3s;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
           }
 
           .box:hover {
             transform: translateY(-5px);
-            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
           }
 
           .box h2 {
             margin: 0;
             font-size: 24px;
             color: #333333;
+            text-align: center;
           }
 
           .stats {
-            margin: 10px 0;
+            margin: 15px 0;
             text-align: center;
           }
 
@@ -108,29 +118,29 @@ const Dashboard = () => {
           }
 
           .stats .number {
-            font-size: 32px;
+            font-size: 40px;
             font-weight: bold;
-            color: #007bff;
+            color: #1e3d58;
           }
 
           .buttons {
             display: flex;
             gap: 10px;
-            margin-top: 10px;
+            margin-top: 15px;
           }
 
           .button {
             text-decoration: none;
             color: #ffffff;
-            background-color: #007bff;
-            padding: 10px 15px;
-            border-radius: 5px;
-            transition: background-color 0.3s, transform 0.3s;
+            background-color: #1e3d58;
+            padding: 10px 20px;
+            border-radius: 8px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
             font-size: 14px;
           }
 
           .button:hover {
-            background-color: #0056b3;
+            background-color: #14567a;
             transform: scale(1.05);
           }
 
