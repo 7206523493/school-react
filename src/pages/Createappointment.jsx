@@ -7,6 +7,8 @@ const DoctorAppointment = () => {
     google_meet_link: "",
   });
 
+  const [responseMessage, setResponseMessage] = useState(""); // State to store server response message
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -15,8 +17,11 @@ const DoctorAppointment = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // Log the formData to check the fields before sending the request
+    console.log(formData); 
+
     try {
-      const response = await fetch("/doctorappointcreate", {
+      const response = await fetch("http://localhost:5000/doctorappointcreate", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -25,8 +30,9 @@ const DoctorAppointment = () => {
       });
 
       if (response.ok) {
-        const data = await response.json();
-        alert("Appointment successfully created!");
+        const data = await response.json(); // Parse the response as JSON
+
+        setResponseMessage("Appointment successfully created!"); // Display success message
         console.log("Response from server:", data);
         setFormData({
           doctor_mobile: "",
@@ -34,12 +40,13 @@ const DoctorAppointment = () => {
           google_meet_link: "",
         });
       } else {
-        console.error("Failed to create appointment");
-        alert("Error creating appointment. Please try again.");
+        const errorData = await response.json(); // Get error data from server response
+        console.error("Error from server:", errorData);
+        setResponseMessage(`Error: ${errorData.message || "Failed to create appointment. Please try again."}`);
       }
     } catch (error) {
       console.error("Error:", error);
-      alert("An error occurred while sending the appointment. Please try again.");
+      setResponseMessage("An error occurred while sending the appointment. Please try again.");
     }
   };
 
@@ -102,6 +109,13 @@ const DoctorAppointment = () => {
           Send Appointment
         </button>
       </form>
+
+      {/* Response message */}
+      {responseMessage && (
+        <div style={{ marginTop: "20px", color: responseMessage.includes("successfully") ? "green" : "red" }}>
+          <strong>{responseMessage}</strong>
+        </div>
+      )}
     </div>
   );
 };
